@@ -1,5 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Space Grotesk", sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.App {
+  height: 100vh;
+  display: flex;
+}
+.formLeft {
+  flex: 2;
+  background: linear-gradient(
+    135deg,
+    #041f1b,
+    #380c4a,
+    #3b0e46,
+    #3d0f42,
+    #441436,
+    #33254e,
+    #2b2d59,
+    #292654,
+    #271f4f,
+    #240d37,
+    #22052d,
+    #22052d,
+    #22052d,
+    #22052d
+  );
+  height: 100%;
+}
+.formRight {
+  height: 100%;
+  flex: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%;
+}
+
+.labl {
+  display: inline-block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+.inpt {
+  width: 100%;
+  height: 45px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 3px 10px;
+  appearance: textfield;
+}
+.inpt::placeholder {
+  color: gray;
+  font-weight: bold;
+}
+.dateCvv {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dateCvvInputs {
+  display: flex;
+  gap: 10px;
+}
+.dateCvvInputs input {
+  width: 100px;
+}
+.errorInput {
+  display: block;
+  font-size: 1rem;
+  color: red;
+}
+button {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #220930;
+  color: white;
+  cursor: pointer;
 }
