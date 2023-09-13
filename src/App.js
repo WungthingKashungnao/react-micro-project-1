@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import FrontCreditCard from "./components/frontcard/FrontCreditCard";
+import BackCreditCard from "./components/backcard/BackCreditCard";
 
 function App() {
   const [data, setData] = useState({
@@ -31,13 +33,11 @@ function App() {
       data.cvc !== ""
     ) {
       if (data.cardNum.length !== 16) {
-        // setErrorCard("invaid card number, it must be equal to 16 digits");
         setErr({
           ...err,
           errCard: "invaid card number, it must be equal to 16 digits",
         });
         alert("invaid card number, it must be equal to 16 digits");
-        // setCardNum("");
         setData({ ...data, cardNum: "" });
       } else if (
         data.month.length > 2 ||
@@ -45,26 +45,20 @@ function App() {
         data.month > 12 ||
         data.month === "0"
       ) {
-        // setErrorMonth("invalid month");
         setErr({ ...err, errMonth: "invalid month" });
         alert("invalid month");
-        // setMonth("");
         setData({ ...data, month: "" });
       } else if (
         data.year.length > 2 ||
         data.year.length === 1 ||
         data.year === "0"
       ) {
-        // setErrorYear("Invalid year");
         setErr({ ...err, errYear: "invalid year" });
         alert("Invalid year");
-        // setYear("");
         setData({ ...data, year: "" });
-      } else if (data.cvc.length !== 3) {
-        // setErrorCvc("invalid cvc, it must be 3 digits");
+      } else if (data.cvc.length !== 3 || data.cvc === "000") {
         setErr({ ...err, errCvc: "invalid cvc, it must be 3 digits" });
-        alert("invalid cvc, it must be 3 digits");
-        // setCvc("");
+        alert("invalid cvc, it must be 3 digits and cannot be 000");
         setData({ ...data, cvc: "" });
       } else {
         console.log(` name: ${data.name}`);
@@ -79,7 +73,15 @@ function App() {
   };
   return (
     <div className="App">
-      <div className="formLeft"></div>
+      <div className="formLeft">
+        <FrontCreditCard
+          cardNum={data.cardNum}
+          name={data.name}
+          month={data.month}
+          year={data.year}
+        />
+        <BackCreditCard cvc={data.cvc} />
+      </div>
       <div className="formRight">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="userName">
@@ -89,7 +91,6 @@ function App() {
               type="text"
               className="inpt"
               placeholder="e.g Jane Appleseed"
-              // onChange={(e) => setName(e.target.value)}
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
             />
@@ -104,14 +105,12 @@ function App() {
               type="number"
               className="inpt"
               placeholder="e.g 1234 6578 9123 0000"
-              // onChange={(e) => setCardNum(e.target.value)}
               onChange={(e) => setData({ ...data, cardNum: e.target.value })}
               value={data.cardNum}
             />
             {err.errCard !== null ? (
               <>
                 <p className="errorInput">{err.errCard}</p>
-                {/* {setErrorCard(null)} */}
                 {setErr({ ...err, errCard: null })}
               </>
             ) : (
@@ -130,7 +129,6 @@ function App() {
                   type="number"
                   className="inpt"
                   placeholder="MM"
-                  // onChange={(e) => setMonth(e.target.value)}
                   onChange={(e) => setData({ ...data, month: e.target.value })}
                   value={data.month}
                 />
@@ -139,7 +137,6 @@ function App() {
                   type="number"
                   className="inpt"
                   placeholder="YY"
-                  // onChange={(e) => setYear(e.target.value)}
                   onChange={(e) => setData({ ...data, year: e.target.value })}
                   value={data.year}
                 />
@@ -147,7 +144,6 @@ function App() {
               {err.errMonth !== null ? (
                 <>
                   <p className="errorInput">{err.errMonth}</p>
-                  {/* {setErrorMonth(null)} */}
                   {setErr({ ...err, errMonth: null })}
                 </>
               ) : (
@@ -161,7 +157,6 @@ function App() {
               {err.errYear !== null ? (
                 <>
                   <p className="errorInput">{err.errYear}</p>
-                  {/* {setErrorYear(null)} */}
                   {setErr({ ...err, errYear: null })}
                 </>
               ) : (
@@ -178,14 +173,12 @@ function App() {
                 type="number"
                 className="inpt"
                 placeholder="e.g 123"
-                // onChange={(e) => setCvc(e.target.value)}
                 onChange={(e) => setData({ ...data, cvc: e.target.value })}
                 value={data.cvc}
               />
               {err.errCvc !== null ? (
                 <>
                   <p className="errorInput">{err.errCvc}</p>
-                  {/* {setErrorCvc(null)} */}
                   {setErr({ ...err, errCvc: null })}
                 </>
               ) : (

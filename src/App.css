@@ -36,6 +36,7 @@ input[type="number"]::-webkit-outer-spin-button {
     #22052d
   );
   height: 100%;
+  position: relative;
 }
 .formRight {
   height: 100%;
@@ -43,6 +44,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.735);
 }
 
 form {
@@ -74,12 +76,18 @@ form {
   align-items: center;
   gap: 20px;
 }
+.dateCvvInputCon {
+  flex: 1;
+}
+.cvvInput {
+  flex: 1;
+}
 .dateCvvInputs {
   display: flex;
   gap: 10px;
 }
 .dateCvvInputs input {
-  width: 100px;
+  width: 40%;
 }
 .errorInput {
   display: block;
