@@ -2,8 +2,21 @@ import { useState } from "react";
 import "./App.css";
 import FrontCreditCard from "./components/frontcard/FrontCreditCard";
 import BackCreditCard from "./components/backcard/BackCreditCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const notify = () =>
+    toast.success("Sucessfully Added Card Details!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   const [data, setData] = useState({
     name: null,
     cardNum: null,
@@ -37,16 +50,35 @@ function App() {
           ...err,
           errCard: "invaid card number, it must be equal to 16 digits",
         });
-        alert("invaid card number, it must be equal to 16 digits");
+        toast.error("invaid card number, it must be equal to 16 digits!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         setData({ ...data, cardNum: "" });
       } else if (
         data.month.length > 2 ||
         data.month.length < 1 ||
         data.month > 12 ||
-        data.month === "0"
+        data.month === "0" ||
+        data.month === "00"
       ) {
         setErr({ ...err, errMonth: "invalid month" });
-        alert("invalid month");
+        toast.error("invalid month!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         setData({ ...data, month: "" });
       } else if (
         data.year.length > 2 ||
@@ -54,13 +86,32 @@ function App() {
         data.year === "0"
       ) {
         setErr({ ...err, errYear: "invalid year" });
-        alert("Invalid year");
+        toast.error("Invalid year!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         setData({ ...data, year: "" });
       } else if (data.cvc.length !== 3 || data.cvc === "000") {
         setErr({ ...err, errCvc: "invalid cvc, it must be 3 digits" });
-        alert("invalid cvc, it must be 3 digits and cannot be 000");
+        toast.error("invalid cvc, it must be 3 digits and cannot be 000!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         setData({ ...data, cvc: "" });
       } else {
+        notify();
         console.log(` name: ${data.name}`);
         console.log(` cardNum: ${data.cardNum}  `);
         console.log(` month: ${data.month}`);
@@ -68,7 +119,16 @@ function App() {
         console.log(` cvc: ${data.cvc}`);
       }
     } else {
-      alert("all input fields required");
+      toast.error("all input fields required!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
   return (
@@ -193,6 +253,7 @@ function App() {
           <button onClick={(e) => handleSubmit(e)}>Confirm</button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
