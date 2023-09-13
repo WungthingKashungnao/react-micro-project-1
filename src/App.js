@@ -83,7 +83,8 @@ function App() {
       } else if (
         data.year.length > 2 ||
         data.year.length === 1 ||
-        data.year === "0"
+        data.year === "0" ||
+        data.year === "00"
       ) {
         setErr({ ...err, errYear: "invalid year" });
         toast.error("Invalid year!", {
@@ -165,6 +166,10 @@ function App() {
               type="number"
               className="inpt"
               placeholder="e.g 1234 6578 9123 0000"
+              // prevent entering unwanted characters in input field
+              onKeyDown={(evt) =>
+                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
+              }
               onChange={(e) => setData({ ...data, cardNum: e.target.value })}
               value={data.cardNum}
             />
