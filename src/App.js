@@ -194,6 +194,11 @@ function App() {
                   type="number"
                   className="inpt"
                   placeholder="MM"
+                  // prevent entering unwanted characters in input field
+                  onKeyDown={(evt) =>
+                    ["e", "E", "+", "-"].includes(evt.key) &&
+                    evt.preventDefault()
+                  }
                   onChange={(e) => setData({ ...data, month: e.target.value })}
                   value={data.month}
                 />
@@ -202,6 +207,11 @@ function App() {
                   type="number"
                   className="inpt"
                   placeholder="YY"
+                  // prevent entering unwanted characters in input field
+                  onKeyDown={(evt) =>
+                    ["e", "E", "+", "-"].includes(evt.key) &&
+                    evt.preventDefault()
+                  }
                   onChange={(e) => setData({ ...data, year: e.target.value })}
                   value={data.year}
                 />
@@ -238,6 +248,10 @@ function App() {
                 type="number"
                 className="inpt"
                 placeholder="e.g 123"
+                // prevent entering unwanted characters in input field
+                onKeyDown={(evt) =>
+                  ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
+                }
                 onChange={(e) => setData({ ...data, cvc: e.target.value })}
                 value={data.cvc}
               />
